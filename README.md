@@ -349,12 +349,6 @@ The server starts on **port 8000** and serves both the frontend files and the ga
 
 ---
 
-## 📝 All Rights Reserved
-
-This project and its source code are proprietary. All rights reserved.
-
----
-
 <p align="center">Built to demonstrate the power of AI algorithms through interactive gameplay — from random moves to perfect play.</p>
 
 
