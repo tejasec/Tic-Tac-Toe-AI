@@ -27,9 +27,10 @@
 
 ## 🎯 Problem Statement
 
-Understanding artificial intelligence algorithms can be abstract and difficult without hands-on experience. Traditional textbook explanations of game theory concepts like Minimax, Alpha-Beta Pruning, and decision trees often fail to convey how these algorithms work in practice.
+This Project attempts to Game theory concepts like Minimax, Alpha-Beta Pruning, and decision trees often fail to convey how these algorithms work in practice.
 
 There is a need for:
+
 1. **Interactive demonstrations** that make AI concepts tangible and engaging
 2. **Visual representations** of algorithm decision-making in real-time
 3. **Accessible tools** that require no setup or external dependencies
@@ -66,48 +67,48 @@ Tic-Tac-Toe-AI exists to **democratize understanding of AI algorithms** through 
 
 ## 🧑‍🎓 Use Cases
 
-| Scenario | How Tic-Tac-Toe-AI Helps |
-|----------|--------------------------|
+| Scenario                               | How Tic-Tac-Toe-AI Helps                                                 |
+| -------------------------------------- | ------------------------------------------------------------------------ |
 | A student learning about AI algorithms | Plays against different difficulty levels to see how AI thinking changes |
-| A teacher demonstrating game theory | Uses the game as a visual aid in classroom lectures |
-| A developer learning Minimax | Studies the clean Python implementation in `logic.py` |
-| Someone wanting to play Tic-Tac-Toe | Uses PvP mode for local two-player matches |
-| Testing AI optimization techniques | Compares depth-limited vs full Minimax (Hard vs Unbeatable) |
-| A parent teaching kids about AI | Shows how "smart" vs "dumb" AI differs in Easy vs Unbeatable modes |
-| A CS student working on a project | Uses as reference or extends with new features |
+| A teacher demonstrating game theory    | Uses the game as a visual aid in classroom lectures                      |
+| A developer learning Minimax           | Studies the clean Python implementation in `logic.py`                    |
+| Someone wanting to play Tic-Tac-Toe    | Uses PvP mode for local two-player matches                               |
+| Testing AI optimization techniques     | Compares depth-limited vs full Minimax (Hard vs Unbeatable)              |
+| A parent teaching kids about AI        | Shows how "smart" vs "dumb" AI differs in Easy vs Unbeatable modes       |
+| A CS student working on a project      | Uses as reference or extends with new features                           |
 
 ---
 
 ## ✨ Features
 
-| Feature | Description |
-|---------|-------------|
-| 🎮 **Multiple Game Modes** | Player vs. Player (PvP) and Player vs. AI (PvA) modes |
-| 🤖 **4 AI Difficulty Levels** | Easy (random), Medium (heuristic), Hard (depth-limited Minimax), Unbeatable (full Minimax) |
-| 📐 **Configurable Grid Sizes** | Play on 2x2 through 9x9 boards with adjusted win conditions |
-| 🏆 **Session Scoreboard** | Tracks wins, losses, and draws for both PvP and PvA modes |
-| 🔊 **Sound Effects** | Audio feedback for clicks, wins, and draws |
-| ✨ **Animated UI** | Gradient backgrounds, glow effects, and pop-out text animations |
-| 📱 **Responsive Design** | Game board adapts to different screen sizes |
-| 🤔 **AI Thinking Indicator** | Shows "AI is thinking..." status during opponent's turn |
-| 🎯 **Win Condition Display** | Clear indication of required pieces to win based on grid size |
-| 🎨 **Modern Interface** | Clean, intuitive design with Google Fonts (Montserrat) |
+| Feature                        | Description                                                                                |
+| ------------------------------ | ------------------------------------------------------------------------------------------ |
+| 🎮 **Multiple Game Modes**     | Player vs. Player (PvP) and Player vs. AI (PvA) modes                                      |
+| 🤖 **4 AI Difficulty Levels**  | Easy (random), Medium (heuristic), Hard (depth-limited Minimax), Unbeatable (full Minimax) |
+| 📐 **Configurable Grid Sizes** | Play on 2x2 through 9x9 boards with adjusted win conditions                                |
+| 🏆 **Session Scoreboard**      | Tracks wins, losses, and draws for both PvP and PvA modes                                  |
+| 🔊 **Sound Effects**           | Audio feedback for clicks, wins, and draws                                                 |
+| ✨ **Animated UI**              | Gradient backgrounds, glow effects, and pop-out text animations                            |
+| 📱 **Responsive Design**       | Game board adapts to different screen sizes                                                |
+| 🤔 **AI Thinking Indicator**   | Shows "AI is thinking..." status during opponent's turn                                    |
+| 🎯 **Win Condition Display**   | Clear indication of required pieces to win based on grid size                              |
+| 🎨 **Modern Interface**        | Clean, intuitive design with Google Fonts (Montserrat)                                     |
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology Used |
-|-------|-----------------|
-| **Frontend / UI** | Vanilla HTML5 |
-| **Styling** | Vanilla CSS3 (with CSS variables, gradients, animations) |
-| **Client Logic** | Vanilla JavaScript (ES6+) |
-| **Backend / Server** | Python 3 (`http.server` module — stdlib only) |
-| **Game Logic** | Python 3 (custom implementation) |
-| **AI Algorithm** | Minimax with Alpha-Beta Pruning (pure Python) |
-| **Font** | Google Fonts (Montserrat) |
-| **Audio** | Web Audio API (`Audio` objects) |
-| **External Dependencies** | **None** — zero npm packages, zero pip packages |
+| Layer                     | Technology Used                                          |
+| ------------------------- | -------------------------------------------------------- |
+| **Frontend / UI**         | Vanilla HTML5                                            |
+| **Styling**               | Vanilla CSS3 (with CSS variables, gradients, animations) |
+| **Client Logic**          | Vanilla JavaScript (ES6+)                                |
+| **Backend / Server**      | Python 3 (`http.server` module — stdlib only)            |
+| **Game Logic**            | Python 3 (custom implementation)                         |
+| **AI Algorithm**          | Minimax with Alpha-Beta Pruning (pure Python)            |
+| **Font**                  | Google Fonts (Montserrat)                                |
+| **Audio**                 | Web Audio API (`Audio` objects)                          |
+| **External Dependencies** | **None** — zero npm packages, zero pip packages          |
 
 ---
 
@@ -211,25 +212,25 @@ This optimization reduces the number of nodes evaluated from O(b^d) to approxima
 
 ## 🎮 Game Modes & Difficulty Levels
 
-| Difficulty | Algorithm | Depth Limit | Behavior |
-|------------|-----------|-------------|----------|
-| 🟢 **Easy** | Random | N/A | Picks a random available cell. Perfect for beginners. |
-| 🟡 **Medium** | Heuristic | N/A | Checks for immediate wins, then blocks opponent wins, then falls back to random. |
-| 🟠 **Hard** | Minimax + α-β | 4 | Depth-limited search. Strong but beatable by skilled players. |
-| 🔴 **Unbeatable** | Minimax + α-β | ∞ | Full game tree search. Theoretically perfect — will always at least draw. |
+| Difficulty        | Algorithm     | Depth Limit | Behavior                                                                         |
+| ----------------- | ------------- | ----------- | -------------------------------------------------------------------------------- |
+| 🟢 **Easy**       | Random        | N/A         | Picks a random available cell. Perfect for beginners.                            |
+| 🟡 **Medium**     | Heuristic     | N/A         | Checks for immediate wins, then blocks opponent wins, then falls back to random. |
+| 🟠 **Hard**       | Minimax + α-β | 4           | Depth-limited search. Strong but beatable by skilled players.                    |
+| 🔴 **Unbeatable** | Minimax + α-β | ∞           | Full game tree search. Theoretically perfect — will always at least draw.        |
 
 ### Grid Sizes & Win Conditions
 
 | Grid Size | Win Condition |
-|-----------|---------------|
-| 2×2 | 2 in a row |
-| 3×3 | 3 in a row |
-| 4×4 | 3 in a row |
-| 5×5 | 4 in a row |
-| 6×6 | 5 in a row |
-| 7×7 | 5 in a row |
-| 8×8 | 6 in a row |
-| 9×9 | 6 in a row |
+| --------- | ------------- |
+| 2×2       | 2 in a row    |
+| 3×3       | 3 in a row    |
+| 4×4       | 3 in a row    |
+| 5×5       | 4 in a row    |
+| 6×6       | 5 in a row    |
+| 7×7       | 5 in a row    |
+| 8×8       | 6 in a row    |
+| 9×9       | 6 in a row    |
 
 > **Note:** AI opponents (Medium/Hard/Unbeatable) only operate on the standard 3×3 grid. For other grid sizes, the AI falls back to random moves.
 
@@ -290,20 +291,29 @@ The server starts on **port 8000** and serves both the frontend files and the ga
 1. **Start the game** — Run `python logic.py` and open `http://localhost:8000`
 
 2. **Select game mode:**
+   
    - **PvP** — Player vs. Player (two humans, same screen)
+   
    - **PvA** — Player vs. AI (you vs. computer)
 
 3. **Configure (optional):**
+   
    - **PvP mode:** Choose grid size (2×2 to 9×9)
+   
    - **PvA mode:** Choose difficulty level (Easy, Medium, Hard, Unbeatable)
 
 4. **Play:**
+   
    - Click on an empty cell to place your mark (X goes first)
+   
    - Players alternate turns
+   
    - First to complete a row, column, or diagonal wins!
 
 5. **Score tracking:**
+   
    - Wins, losses, and draws are tracked per session
+   
    - Scores display separately for PvP and PvA modes
 
 ---
@@ -323,14 +333,14 @@ The server starts on **port 8000** and serves both the frontend files and the ga
 
 ## ⚠️ Limitations
 
-| Limitation | Detail |
-|------------|--------|
-| Single-user server | Only one game session can run at a time; multiple browser tabs will interfere with each other |
-| AI grid restriction | Minimax AI (Medium/Hard/Unbeatable) only works on 3×3 boards; other sizes use random moves |
-| No persistent storage | Scoreboard resets when the server restarts or page is refreshed |
-| No online multiplayer | Only supports local two-player mode on the same device |
-| No AI difficulty explanation | Players must test difficulty levels to understand the differences |
-| No undo functionality | Moves cannot be undone once placed |
+| Limitation                   | Detail                                                                                        |
+| ---------------------------- | --------------------------------------------------------------------------------------------- |
+| Single-user server           | Only one game session can run at a time; multiple browser tabs will interfere with each other |
+| AI grid restriction          | Minimax AI (Medium/Hard/Unbeatable) only works on 3×3 boards; other sizes use random moves    |
+| No persistent storage        | Scoreboard resets when the server restarts or page is refreshed                               |
+| No online multiplayer        | Only supports local two-player mode on the same device                                        |
+| No AI difficulty explanation | Players must test difficulty levels to understand the differences                             |
+| No undo functionality        | Moves cannot be undone once placed                                                            |
 
 ---
 
@@ -350,60 +360,3 @@ The server starts on **port 8000** and serves both the frontend files and the ga
 ---
 
 <p align="center">Built to demonstrate the power of AI algorithms through interactive gameplay — from random moves to perfect play.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> 24436326f15314002e5eb9a6cc5bea6fc4a0cedc
