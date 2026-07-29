@@ -4,26 +4,6 @@
 
 ---
 
-## 📋 Table of Contents
-
-- [Problem Statement](#-problem-statement)
-- [Objective](#-objective)
-- [Purpose](#-purpose)
-- [Use Cases](#-use-cases)
-- [Features](#-features)
-- [Tech Stack](#️-tech-stack)
-- [System Architecture](#-system-architecture)
-- [AI Algorithm Deep Dive](#-ai-algorithm-deep-dive)
-- [Game Modes & Difficulty Levels](#-game-modes--difficulty-levels)
-- [Project Structure](#-project-structure)
-- [Installation & Setup](#-installation--setup)
-- [How to Play](#-how-to-play)
-- [Advantages](#-advantages)
-- [Limitations](#-limitations)
-- [Future Scope](#-future-scope)
-- [All Rights Reserved](#-all-rights-reserved)
-
----
 
 ## 🎯 Problem Statement
 
