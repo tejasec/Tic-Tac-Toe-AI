@@ -216,23 +216,6 @@ This optimization reduces the number of nodes evaluated from O(b^d) to approxima
 
 ---
 
-## 📁 Project Structure
-
-```
-Tic-Tac-Toe-AI/
-│
-├── index.html          # Frontend — single-page app with inline JavaScript
-├── style.css           # Styling — responsive design, animations, gradients
-├── logic.py            # Backend — Python HTTP server + AI logic + game state
-├── sounds/
-│   ├── click.wav       # Cell placement sound effect
-│   ├── draw.wav        # Draw/tie sound effect
-│   ├── ui-click.wav    # UI button click sound
-│   └── win.wav         # Victory sound effect
-└── README.md           # This documentation file
-```
-
----
 
 ## ⚙️ Installation & Setup
 
@@ -320,7 +303,6 @@ The server starts on **port 8000** and serves both the frontend files and the ga
 | No persistent storage        | Scoreboard resets when the server restarts or page is refreshed                               |
 | No online multiplayer        | Only supports local two-player mode on the same device                                        |
 | No AI difficulty explanation | Players must test difficulty levels to understand the differences                             |
-| No undo functionality        | Moves cannot be undone once placed                                                            |
 
 ---
 
