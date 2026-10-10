@@ -170,6 +170,7 @@ http://localhost:8000
 
 The server starts on **port 8000** and serves both the frontend files and the game API.
 
+
 ---
 
 ## 🎮 How to Play

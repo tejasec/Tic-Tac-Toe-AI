@@ -4,6 +4,9 @@ import json
 import os
 import sys
 import mimetypes
+import base64
+import hashlib
+import hmac
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 PLAYER_X = 'X'
@@ -335,7 +338,95 @@ class TicTacToeLogic:
         }
 
 
+SESSION_FIELDS = (
+    'board', 'game_active', 'game_mode', 'current_player', 'difficulty',
+    'grid_size', 'win_length', 'last_winner', 'last_sound',
+    'pvp_score_x', 'pvp_score_o', 'pvp_ties',
+    'pva_score_x', 'pva_score_o', 'pva_ties'
+)
+
+
+def _session_secret():
+    """Return the signing key; Vercel deployments must set it explicitly."""
+    secret = os.environ.get('SESSION_SECRET')
+    if secret:
+        return secret.encode('utf-8')
+    if os.environ.get('VERCEL'):
+        raise RuntimeError('Set SESSION_SECRET in the Vercel project settings.')
+    return b'local-development-only-change-me'
+
+
+def _b64url(data):
+    return base64.urlsafe_b64encode(data).decode('ascii').rstrip('=')
+
+
+def encode_game_session(game_state):
+    """Create a tamper-evident token containing one browser's game state."""
+    payload = {'version': 1}
+    payload.update({field: game_state[field] for field in SESSION_FIELDS})
+    encoded = _b64url(json.dumps(payload, separators=(',', ':'), sort_keys=True).encode('utf-8'))
+    signature = hmac.new(_session_secret(), encoded.encode('ascii'), hashlib.sha256).digest()
+    return encoded + '.' + _b64url(signature)
+
+
+def decode_game_session(token):
+    """Verify and restore a game state carried by the browser."""
+    if not isinstance(token, str) or len(token) > 12000 or token.count('.') != 1:
+        raise ValueError('Invalid game session.')
+    encoded, encoded_signature = token.split('.', 1)
+    try:
+        encoded_bytes = encoded.encode('ascii')
+    except UnicodeEncodeError as exc:
+        raise ValueError('Invalid game session.') from exc
+    expected = _b64url(hmac.new(_session_secret(), encoded_bytes, hashlib.sha256).digest())
+    if not hmac.compare_digest(encoded_signature, expected):
+        raise ValueError('Invalid game session signature.')
+    try:
+        payload = json.loads(base64.urlsafe_b64decode(encoded + '=' * (-len(encoded) % 4)))
+    except (ValueError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError('Invalid game session payload.') from exc
+    if (not isinstance(payload, dict) or payload.get('version') != 1
+            or any(field not in payload for field in SESSION_FIELDS)):
+        raise ValueError('Unsupported game session.')
+
+    game_state = TicTacToeLogic()
+    for field in SESSION_FIELDS:
+        setattr(game_state, field, payload[field])
+    if (not isinstance(game_state.grid_size, int) or not 2 <= game_state.grid_size <= 9
+            or not isinstance(game_state.win_length, int)
+            or not 1 <= game_state.win_length <= game_state.grid_size
+            or not isinstance(game_state.board, list)
+            or len(game_state.board) != game_state.grid_size ** 2
+            or any(cell not in (None, PLAYER_X, PLAYER_O) for cell in game_state.board)):
+        raise ValueError('Invalid game state.')
+    return game_state
+
+
 game = TicTacToeLogic()
+
+
+def apply_action(target_game, data):
+    """Apply one API action to the supplied game instance."""
+    action = data.get('action')
+
+    if action == 'start':
+        mode = data.get('mode', target_game.game_mode or 'pvp')
+        difficulty = data.get('difficulty', target_game.difficulty)
+        size = int(data.get('size', target_game.grid_size or 3))
+        length = int(data.get('length', target_game.win_length or 3))
+        reset_scores = bool(data.get('reset_scores', False))
+        target_game.select_mode(mode, difficulty, size, length)
+        target_game.start_game(reset_scores=reset_scores)
+    elif action == 'restart':
+        target_game.start_game(reset_scores=False)
+    elif action == 'click':
+        index = data.get('index')
+        if index is not None:
+            target_game.handle_cell_click(int(index))
+    elif action == 'reset_scores':
+        target_game.reset_scores(data.get('mode'))
+
+    return target_game.to_dict()
 
 
 class RequestHandler(BaseHTTPRequestHandler):
@@ -383,29 +474,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             except (json.JSONDecodeError, UnicodeDecodeError):
                 data = {}
 
-            action = data.get('action')
-
-            if action == 'start':
-                mode = data.get('mode', game.game_mode or 'pvp')
-                difficulty = data.get('difficulty', game.difficulty)
-                size = int(data.get('size', game.grid_size or 3))
-                length = int(data.get('length', game.win_length or 3))
-                reset_scores = bool(data.get('reset_scores', False))
-
-                game.select_mode(mode, difficulty, size, length)
-                game.start_game(reset_scores=reset_scores)
-
-            elif action == 'restart':
-                game.start_game(reset_scores=False)
-
-            elif action == 'click':
-                index = data.get('index')
-                if index is not None:
-                    game.handle_cell_click(int(index))
-
-            elif action == 'reset_scores':
-                game.reset_scores(data.get('mode'))
-
+            apply_action(game, data)
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()

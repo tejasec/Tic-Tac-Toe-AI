@@ -95,6 +95,7 @@
         let previousScreen = null;
         let latestServerState = null;
         let isRequestPending = false;
+        let sessionToken = sessionStorage.getItem('tic-tac-toe-session-token');
 
         const menuScreen = document.getElementById('menu-screen'),
             difficultyScreen = document.getElementById('difficulty-screen'),
@@ -235,12 +236,19 @@
         async function sendAction(payload) {
             isRequestPending = true;
             try {
+                const requestPayload = { ...payload };
+                if (sessionToken) requestPayload.session_token = sessionToken;
                 const response = await fetch('/api/action', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(requestPayload)
                 });
                 const state = await response.json();
+                if (!response.ok) throw new Error(state.error || 'The game request failed.');
+                if (state.session_token) {
+                    sessionToken = state.session_token;
+                    sessionStorage.setItem('tic-tac-toe-session-token', sessionToken);
+                }
                 latestServerState = state;
                 renderState(state);
                 if (state.sound) {
