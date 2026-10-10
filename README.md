@@ -4,12 +4,6 @@
 
 ---
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c729637 (Updated Python logic)
-## 🎯 Problem Statement
-
 This Project implements Game theory concepts like Minimax, Alpha-Beta Pruning, and decision to convey how these algorithms work in practice in a game.
 
 A Tic-Tac-Toe game with adjustable AI difficulty provides the perfect platform to demonstrate these concepts—from random moves (Easy) to theoretically perfect play (Unbeatable).
@@ -145,13 +139,6 @@ This optimization reduces the number of nodes evaluated from O(b^d) to approxima
 
 > **Note:** AI opponents (Medium/Hard/Unbeatable) only operate on the standard 3×3 grid. For other grid sizes, the AI falls back to random moves.
 
-<<<<<<< HEAD
----
-
-=======
-
----
->>>>>>> c729637 (Updated Python logic)
 
 ## ⚙️ Installation & Setup
 
