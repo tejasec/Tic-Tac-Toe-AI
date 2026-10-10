@@ -4,17 +4,13 @@
 
 ---
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c729637 (Updated Python logic)
 ## 🎯 Problem Statement
 
-This Project attempts to Game theory concepts like Minimax, Alpha-Beta Pruning, and decision trees often fail to convey how these algorithms work in practice.
-
-There is a need for:
-
-1. **Interactive demonstrations** that make AI concepts tangible and engaging
-2. **Visual representations** of algorithm decision-making in real-time
-3. **Accessible tools** that require no setup or external dependencies
-4. **Educational games** that teach while providing entertainment
+This Project implements Game theory concepts like Minimax, Alpha-Beta Pruning, and decision to convey how these algorithms work in practice in a game.
 
 A Tic-Tac-Toe game with adjustable AI difficulty provides the perfect platform to demonstrate these concepts—from random moves (Easy) to theoretically perfect play (Unbeatable).
 
@@ -33,31 +29,6 @@ To design and build an **intelligent Tic-Tac-Toe web application** that:
 
 ---
 
-## 💡 Purpose
-
-Tic-Tac-Toe-AI exists to **democratize understanding of AI algorithms** through interactive gameplay. It serves as:
-
-- An **educational demonstrator** for Minimax and Alpha-Beta Pruning
-- A **learning tool** for students studying artificial intelligence and game theory
-- A **playable game** that's fun for all ages
-- A **reference implementation** showing clean, dependency-free Python code
-- A **starting point** for anyone wanting to understand how game-playing AI works
-
----
-
-## 🧑‍🎓 Use Cases
-
-| Scenario                               | How Tic-Tac-Toe-AI Helps                                                 |
-| -------------------------------------- | ------------------------------------------------------------------------ |
-| A student learning about AI algorithms | Plays against different difficulty levels to see how AI thinking changes |
-| A teacher demonstrating game theory    | Uses the game as a visual aid in classroom lectures                      |
-| A developer learning Minimax           | Studies the clean Python implementation in `logic.py`                    |
-| Someone wanting to play Tic-Tac-Toe    | Uses PvP mode for local two-player matches                               |
-| Testing AI optimization techniques     | Compares depth-limited vs full Minimax (Hard vs Unbeatable)              |
-| A parent teaching kids about AI        | Shows how "smart" vs "dumb" AI differs in Easy vs Unbeatable modes       |
-| A CS student working on a project      | Uses as reference or extends with new features                           |
-
----
 
 ## ✨ Features
 
@@ -82,54 +53,14 @@ Tic-Tac-Toe-AI exists to **democratize understanding of AI algorithms** through 
 | ------------------------- | -------------------------------------------------------- |
 | **Frontend / UI**         | Vanilla HTML5                                            |
 | **Styling**               | Vanilla CSS3 (with CSS variables, gradients, animations) |
-| **Client Logic**          | Vanilla JavaScript (ES6+)                                |
+| **Client / View Layer**   | Vanilla JavaScript (ES6+ — thin view layer driven by backend JSON) |
 | **Backend / Server**      | Python 3 (`http.server` module — stdlib only)            |
-| **Game Logic**            | Python 3 (custom implementation)                         |
+| **Game Logic & State**    | Python 3 (authoritative engine in `logic.py` — stdlib only) |
 | **AI Algorithm**          | Minimax with Alpha-Beta Pruning (pure Python)            |
 | **Font**                  | Google Fonts (Montserrat)                                |
 | **Audio**                 | Web Audio API (`Audio` objects)                          |
 | **External Dependencies** | **None** — zero npm packages, zero pip packages          |
 
----
-
-## 🏗️ System Architecture
-
-```mermaid
-flowchart TB
-    User["👤 Player"] -->|"Click"| Frontend["🖥️ index.html + style.css + JS"]
-
-    Frontend -->|"POST /api/action"| Server["🐍 Python HTTP Server (logic.py)"]
-
-    Server --> Router{"Action Type?"}
-
-    Router -->|Start Game| Init["Initialize Game State"]
-    Router -->|Cell Click| Process["Process Move"]
-
-    Process --> CheckWin{"Check Winner"}
-    CheckWin -->|Game Over| Result["Return Winner/Draw"]
-    CheckWin -->|Continue| AI{"AI Mode?"}
-
-    AI -->|PvP| NextPlayer["Next Human Player"]
-    AI -->|PvA| AILogic["🤖 AI Decision Engine"]
-
-    AILogic --> Easy["Easy: Random Move"]
-    AILogic --> Medium["Medium: Win/Block Detection"]
-    AILogic --> Hard["Hard: Minimax (Depth 4)"]
-    AILogic --> Unbeatable["Unbeatable: Full Minimax"]
-
-    Easy --> Move["AI Move"]
-    Medium --> Move
-    Hard --> Move
-    Unbeatable --> Move
-
-    Move --> CheckWin
-
-    Result -->|"JSON Response"| Frontend
-    NextPlayer -->|"JSON Response"| Frontend
-    Init -->|"JSON Response"| Frontend
-
-    Frontend -->|"Update UI"| User
-```
 
 ---
 
@@ -214,8 +145,13 @@ This optimization reduces the number of nodes evaluated from O(b^d) to approxima
 
 > **Note:** AI opponents (Medium/Hard/Unbeatable) only operate on the standard 3×3 grid. For other grid sizes, the AI falls back to random moves.
 
+<<<<<<< HEAD
 ---
 
+=======
+
+---
+>>>>>>> c729637 (Updated Python logic)
 
 ## ⚙️ Installation & Setup
 
@@ -318,6 +254,23 @@ The server starts on **port 8000** and serves both the frontend files and the ga
 - 🧩 **AI visualization** — show the game tree and decision-making process in real-time
 - 🏆 **Leaderboard system** — persistent rankings for multiple players
 - 🤝 **AI difficulty progression** — adaptive difficulty that learns from player skill level
+
+---
+
+## 🧪 Testing
+
+The test suite uses Python's standard library `unittest` module with zero external dependencies.
+
+To run all automated tests:
+
+```bash
+python3 -m unittest discover tests -v
+```
+
+This verifies:
+- `test_game_logic.py`: Game rules, turn alternating, win/draw detection across 2x2 to 9x9 grids, and score tracking.
+- `test_ai.py`: Decision logic for Easy, Medium, Hard, and Unbeatable Minimax AI.
+- `test_api.py`: Static asset serving and POST `/api/action` API contracts.
 
 ---
 

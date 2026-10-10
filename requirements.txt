@@ -1,0 +1,5 @@
+# Tic-Tac-Toe AI uses Python Standard Library only.
+# No third-party pip packages are required to run the game or its test suite.
+#
+# Optional future development packages (e.g. pytest, flake8, black) can be listed here:
+# pytest>=7.0.0
